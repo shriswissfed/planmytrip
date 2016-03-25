@@ -14,12 +14,17 @@
     Start:<input type="text" id="start"> <!-- getting starting poin t frm user -->
     Waypoints:
     <!-- <input type="text" id="waypoints"> -->
-    <select multiple id="waypoints">
+  <!--   <select multiple id="waypoints">
       <option value="trichy">trichy</option>
       <option value="theni">theni</option>
       <option value="ooty">ooty</option>
-      
-    </select>
+
+    </select> -->
+   <input type="text" id="waypoint1">
+   <input type="text" id="waypoint2" class="hidden">
+   <input type="text" id="waypoint3" class="hidden">
+   <button onclick="showcard();" class="btn">Add</button>
+
     End:<input type="text" id="end">  <!-- getting dest. from user -->
       <input type="submit" id="submit">
     </div>
@@ -27,6 +32,7 @@
     </div>
 
     <script>
+    function showcard(){document.getElementById("waypoint2").className="reveal";}
       function planmytrip() {
         var directionsService = new google.maps.DirectionsService;
 
@@ -51,17 +57,25 @@
       }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        
         var waypts = [];  // consits of the ways the user trespasses
 
-        var checkboxArray = document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
-          if (checkboxArray.options[i].selected) {
+        var checkboxArray = document.getElementById('waypoint1');
             waypts.push({
-              location: checkboxArray[i].value,
+              location: checkboxArray.value,
               stopover: true
             });
-          }
-        }
+        
+
+        // var checkboxArray = document.getElementById('waypoints');
+        // for (var i = 0; i < checkboxArray.length; i++) {
+        //   if (checkboxArray.options[i].selected) {
+        //     waypts.push({
+        //       location: checkboxArray[i].value,
+        //       stopover: true
+        //     });
+        //   }
+        // }
         console.log(waypts);
 
         directionsService.route({
@@ -79,7 +93,7 @@
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
               var routeSegment = i + 1;
-              details.innerHTML += '<b>total kms: ' + routeSegment +
+              details.innerHTML += '<b>Total kms of route : ' + routeSegment +
                   '</b><br>';
               details.innerHTML += route.legs[i].start_address + ' to ';
               details.innerHTML += route.legs[i].end_address + '<br>';
@@ -91,7 +105,7 @@
         });
       }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuatg9S37ZVt3vva5HF3eoCIyOY6SC9I&callback=planmytrip">
-    </script>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuatg9S37ZVt3vva5HF3eoCIyOY6SC9I&callback=planmytrip"></script>
   </body>
 </html>
