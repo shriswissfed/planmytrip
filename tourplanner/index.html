@@ -37,12 +37,18 @@
     </div>
 <paper-dialog id="actions">
    <h2>plan!!!</h2>
+   
    <div id="direction-panel"></div>
-   <div class="buttons">
-        <!-- <paper-button >More Info...</paper-button> -->
+   <p id="bill"></p>
+   <p id="note"></p>
+  <!--  <div class="buttons">
+        <paper-button >More Info...</paper-button>
         <paper-button dialog-dismiss>Decline</paper-button>
         <paper-button dialog-confirm autofocus>Accept</paper-button>
-      </div>
+      </div> -->
+      <!-- PayU checkout-->
+     <div class="pm-button"><a href="https://www.payumoney.com/paybypayumoney/#/119303"><img src="https://www.payumoney.com//media/images/payby_payumoney/buttons/131.png" /></a></div>
+
    </paper-dialog>
    </section>
   <!--   <paper-dialog>
@@ -153,6 +159,8 @@
             var details = document.getElementById('direction-panel'); // to return details !!!
             details.innerHTML = '';
             // For each route, display summary information.
+            var totaldistance =0;
+            var totalamount=0;
             for (var i = 0; i < route.legs.length; i++) {
               var routeSegment = i + 1;
               details.innerHTML += '<b>Total kms of route : ' + routeSegment +
@@ -160,8 +168,14 @@
               details.innerHTML += route.legs[i].start_address + ' to ';
               details.innerHTML += route.legs[i].end_address + '<br>';
               details.innerHTML += route.legs[i].distance.text + '<br><br>';
+             totaldistance = totaldistance+route.legs[i].distance.value;
             }
-          } else {
+console.log(totaldistance=totaldistance/1000);
+ document.getElementById('bill').innerHTML='Total distance is ' +totaldistance+' Kms';
+ totalamount=totaldistance*5;
+  document.getElementById('note').innerHTML='<b>Please pay Rs. ' + Math.round(totalamount) +' at checkout </b>';
+
+           } else {
             window.alert('Directions request failed due to ' + status);  // adding exception from server
           }
         });
