@@ -36,13 +36,13 @@
       function planmytrip() {
         var directionsService = new google.maps.DirectionsService;
 
-        // FOR AUTOCOMPLETE SUGGESTION ---- NOT WORKING 
-        // google.maps.event.addDomListener(window, 'load', function () {
-        //     new google.maps.places.SearchBox(document.getElementById('txtSource'));
-        //     new google.maps.places.SearchBox(document.getElementById('txtDestination'));
-        //     directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+        // FOR AUTOCOMPLETE SUGGESTION !!!!
+        google.maps.event.addDomListener(window, 'load', function () {
+            new google.maps.places.SearchBox(document.getElementById('start'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint1'));
+            new google.maps.places.SearchBox(document.getElementById('end'));
 
-        // });  
+        });  
 
         var directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -106,6 +106,6 @@
       }
     </script>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuatg9S37ZVt3vva5HF3eoCIyOY6SC9I&callback=planmytrip"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvuatg9S37ZVt3vva5HF3eoCIyOY6SC9I&callback=planmytrip&libraries=places"></script>
   </body>
 </html>
