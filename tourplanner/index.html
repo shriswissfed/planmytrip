@@ -21,8 +21,8 @@
 
     </select> -->
    <input type="text" id="waypoint1">
-   <input type="text" id="waypoint2" class="hidden">
-   <input type="text" id="waypoint3" class="hidden">
+   <input type="text" id="waypoint2" >
+   <input type="text" id="waypoint3" >
    <button onclick="showcard();" class="btn">Add</button>
 
     End:<input type="text" id="end">  <!-- getting dest. from user -->
@@ -40,7 +40,11 @@
         google.maps.event.addDomListener(window, 'load', function () {
             new google.maps.places.SearchBox(document.getElementById('start'));
             new google.maps.places.SearchBox(document.getElementById('waypoint1'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint2'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint3'));
+
             new google.maps.places.SearchBox(document.getElementById('end'));
+
 
         });  
 
@@ -65,7 +69,25 @@
               location: checkboxArray.value,
               stopover: true
             });
-        
+
+            if(document.getElementById('waypoint2').value!=0)
+          {
+            checkboxArray = document.getElementById('waypoint2');
+            waypts.push({
+              location: checkboxArray.value,
+              stopover: true
+            });
+          }
+
+          if(document.getElementById('waypoint3').value!=0)
+          {
+            checkboxArray = document.getElementById('waypoint3');
+            waypts.push({
+              location: checkboxArray.value,
+              stopover: true
+            });
+          }
+ 
 
         // var checkboxArray = document.getElementById('waypoints');
         // for (var i = 0; i < checkboxArray.length; i++) {
