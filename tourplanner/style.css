@@ -1,7 +1,7 @@
       #right-panel {
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
-        padding-left: 10px;
+        padding-left: 5px;
       }
 
       #right-panel select, #right-panel input {
@@ -23,7 +23,7 @@
       #map {
         height: 100%;
         float: left;
-        width: 70%;
+        width: 75%;
         height: 100%;
       }
       #right-panel {
@@ -36,7 +36,7 @@
       }
       #directions-panel {
         margin-top: 20px;
-        background-color: #FFEE77;
+        /*background-color: #FFEE77;*/
         padding: 10px;
       }
 

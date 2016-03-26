@@ -1,38 +1,78 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <title>Waypoints in directions</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-      
+    <link rel="import" href="./bower_components/polymer/polymer.html">
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/paper-input/paper-input.html">
+    <link rel="import" href="./bower_components/paper-dialog/paper-dialog.html">
   </head>
   <body>
     <div id="map"></div>
+    <section onclick="clickHandler(event)">
     <div id="right-panel">
     <div>
-    Start:<input type="text" id="start"> <!-- getting starting poin t frm user -->
-    Waypoints:
-    <!-- <input type="text" id="waypoints"> -->
+    
+    <paper-input type="text" label="Start:" id="start"></paper-input><!-- getting starting poin t frm user -->
+   
+    <!-- <paper-input type="text" id="waypoints"> -->
   <!--   <select multiple id="waypoints">
       <option value="trichy">trichy</option>
       <option value="theni">theni</option>
       <option value="ooty">ooty</option>
 
     </select> -->
-   <input type="text" id="waypoint1">
-   <input type="text" id="waypoint2" >
-   <input type="text" id="waypoint3" >
-   <button onclick="showcard();" class="btn">Add</button>
-
-    End:<input type="text" id="end">  <!-- getting dest. from user -->
-      <input type="submit" id="submit">
+   <paper-input type="text" id="waypoint1" label="waypoint 1"></paper-input>
+   <paper-input type="text" id="waypoint2" label="waypoint 2"></paper-input>
+   <paper-input type="text" id="waypoint3" label="waypoint 3"></paper-input>
+   <!-- <button onclick="showcard();">Add</button> -->
+   <paper-input type="text" id="end" label="End"> </paper-input> <!-- getting dest. from user -->
+     <paper-button raised data-dialog="actions" type="submit" id="submit">Submit</paper-button >
     </div>
-    <div id="directions-panel"></div>
+   <!-- <div id="direction-panel"></div> -->
     </div>
-
+<paper-dialog id="actions">
+   <h2>plan!!!</h2>
+   <div id="direction-panel"></div>
+   <div class="buttons">
+        <!-- <paper-button >More Info...</paper-button> -->
+        <paper-button dialog-dismiss>Decline</paper-button>
+        <paper-button dialog-confirm autofocus>Accept</paper-button>
+      </div>
+   </paper-dialog>
+   </section>
+  <!--   <paper-dialog>
+  <h2>Header</h2>
+  <paper-dialog-scrollable>
+    Lorem ipsum...
+  </paper-dialog-scrollable>
+  <div class="buttons">
+    <paper-button dialog-dismiss>Cancel</paper-button>
+    <paper-button dialog-confirm>Accept</paper-button>
+  </div>
+</paper-dialog> -->
+<script>
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+  </script>
     <script>
-    function showcard(){document.getElementById("waypoint2").className="reveal";}
+    // function showcard(){document.getElementById("waypoint2").className="reveal";}
       function planmytrip() {
         var directionsService = new google.maps.DirectionsService;
 
@@ -110,7 +150,7 @@
           if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
-            var details = document.getElementById('directions-panel'); // to return details !!!
+            var details = document.getElementById('direction-panel'); // to return details !!!
             details.innerHTML = '';
             // For each route, display summary information.
             for (var i = 0; i < route.legs.length; i++) {
